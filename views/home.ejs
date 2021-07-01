@@ -1,8 +1,14 @@
 <% layout('layouts/boilerplate') %>
-<h1>All Champions</h1>
-<% Object.values(champions).forEach((champion) => { %>
-<ul>
-    <li><%= champion.name %>, <%= champion.title %></li>
-    <img src="<%= champion.icon %>" alt="<%= champion.name %>">
-</ul>
-<% }) %>
+<div class="container">
+    <h1 class="text-center mb-3">All Champions</h1>
+    <div class="row border">
+        <% Object.values(champions).forEach((champion) => { %>
+        <div class="container mt-3" style="width: 10rem;">
+            <img src="<%= champion.icon %>" class="img-thumbnail" alt="<%= champion.name %>">
+            <div class="card-body">
+                <p class="text-center"><%= champion.name %></p>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
