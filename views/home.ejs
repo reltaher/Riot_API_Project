@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<h1>All Champions</h1>
+<% Object.values(champions).forEach((champion) => { %>
+<ul>
+    <li><%= champion.name %>, <%= champion.title %></li>
+    <img src="<%= champion.icon %>" alt="<%= champion.name %>">
+</ul>
+<% }) %>
+
+<body>
+
+</body>
+
+</html>
