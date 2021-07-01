@@ -15,9 +15,7 @@ const championData = 'http://cdn.merakianalytics.com/riot/lol/resources/latest/e
 
 app.get('/', async(req, res) => {
     const response = await fetch(championData);
-    const champions = await response.json();
-    //Object.values(champions).forEach(champion => res.render('home', {champion}))
-    
+    const champions = await response.json();   
     res.render('home', {champions});
 })
 
