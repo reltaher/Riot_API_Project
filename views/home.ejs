@@ -4,7 +4,9 @@
     <div class="row border mb-3">
         <% Object.values(champions).forEach((champion) => { %>
         <div class="container mt-3" style="width: 10rem;">
-            <img src="<%= champion.icon %>" class="img-thumbnail" alt="<%= champion.name %>">
+            <a href="/<%= champion.name %>">
+                z
+            </a>
             <div class="card-body">
                 <p class="text-center"><%= champion.name %></p>
             </div>
