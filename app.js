@@ -34,7 +34,24 @@ app.get('/champions', async(req, res) => {
 })
 
 app.get('/champions/:champName', async(req, res) => {
-    const championData = `http://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/${req.params.champName}.json`
+    let { champName } = req.params;
+    //Wukong
+    if (champName === 'Wukong') {champName = 'MonkeyKing';}
+    //Nunu & Willump
+    if (champName === 'Nunu & Willump') {champName = 'Nunu';}
+    //Kog'Maw
+    if (champName === 'Kog\'Maw') {champName = 'KogMaw';}
+    //Dr. Mundo
+    if (champName === 'Dr. Mundo') {champName = 'DrMundo';}
+    //LeBlanc
+    if (champName === 'LeBlanc') {champName = 'Leblanc';}
+    //Rek'Sai
+    if (champName === 'Rek\'Sai') {champName = 'RekSai';}
+    //Any champ with an apostraphe in their name (Kog'Maw & Rek'Sai are exceptions since their names in the API are "KogMaw" and "RekSai" respectively).
+    if (champName.includes('\'')) {champName = champName.charAt(0) + champName.substring(1).toLowerCase().replace('\'', '');}
+    //Any champion with a space in their name
+    if (champName.includes(' ')) {champName = champName.replace(' ', '');}
+    const championData = `http://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/${champName}.json`
     const response = await fetch(championData);
     const champion = await response.json(); 
     res.render('champion/championPage', {champion});
