@@ -5,51 +5,69 @@
     <img src="<%= champion.icon %>" class="img-thumbnail" alt="<%= champion.name %>">
 </div>
 <div class="row border mb-3">
-    <p><%= champion.lore %></p>
-    <div class="card text-center w-100">
-        <div class="card-header text-center">
-            Base Stats
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Health: <%= champion.stats.health.flat %> -
-                <%= champion.stats.health.flat + (17 * champion.stats.health.perLevel)%></li>
-            <li class="list-group-item">Health Per Level: <%= champion.stats.health.perLevel %></li>
-            <li class="list-group-item">Health Regen (Per 5s): <%= champion.stats.healthRegen.flat %> -
-                <%= champion.stats.healthRegen.flat + (champion.stats.healthRegen.perLevel * 17) %></li>
-            <li class="list-group-item">Health Regen Per Level: <%= champion.stats.healthRegen.perLevel %></li>
-            <% if (champion.stats.mana.flat == 0 && champion.stats.manaRegen.flat == 0) { %>
-            <li class="list-group-item">Mana: N/A </li>
-            <li class="list-group-item">Mana Regen: N/A</li>
-            <% } else {%>
-            <li class="list-group-item">Mana: <%= champion.stats.mana.flat%> -
-                <%= champion.stats.mana.flat + (17 * champion.stats.mana.perLevel)%></li>
-            <li class="list-group-item">Mana Regen (Per 5s): <%= champion.stats.manaRegen.flat %> -
-                <%= champion.stats.manaRegen.flat + (17 * champion.stats.manaRegen.perLevel)%></li>
-            <li class="list-group-item">Mana Regen Per Level: <%= champion.stats.manaRegen.perLevel%></li>
-            <% } %>
-
-            <li class="list-group-item">Armor: <%= champion.stats.armor.flat %> -
-                <%= champion.stats.armor.flat + (17 * champion.stats.armor.perLevel)%></li>
-            <li class="list-group-item">Magic Resistance: <%= champion.stats.magicResistance.flat %> -
-                <%= champion.stats.magicResistance.flat + (17 * champion.stats.magicResistance.perLevel)%></li>
-            <li class="list-group-item">Attack Damage: <%= champion.stats.attackDamage.flat %> -
-                <%= champion.stats.attackDamage.flat + (17 * champion.stats.attackDamage.perLevel)%></li>
-            <li class="list-group-item">Movement Speed: <%= champion.stats.movespeed.flat %></li>
-            <li class="list-group-item">Acquisition Radius: <%= champion.stats.acquisitionRadius.flat %></li>
-            <li class="list-group-item">Selection Radius: <%= champion.stats.selectionRadius.flat %></li>
-            <li class="list-group-item">Pathing Radius: <%= champion.stats.pathingRadius.flat %></li>
-            <li class="list-group-item">Gameplay Radius: <%= champion.stats.gameplayRadius.flat %></li>
-            <li class="list-group-item">Critical Strike Damage: <%= champion.stats.criticalStrikeDamage.flat %></li>
-            <li class="list-group-item">Attack Speed: <%= champion.stats.attackSpeed.flat %>% -
-                <%= champion.stats.attackSpeed.flat + (17 * champion.stats.attackSpeed.perLevel)%>%</li>
-            <li class="list-group-item">Attack Speed Ratio: <%= champion.stats.attackSpeedRatio.flat.toFixed(2) %>
-            </li>
-            <li class="list-group-item">Attack Cast Time: <%= champion.stats.attackCastTime.flat.toFixed(2) %></li>
-            <li class="list-group-item">Attack Total Time: <%= champion.stats.attackTotalTime.flat.toFixed(2) %>
-            </li>
-            <li class="list-group-item">Attack Delay Offset: <%= champion.stats.attackDelayOffset.flat.toFixed(2) %>
-            </li>
-            <li class="list-group-item">Attack Range: <%= champion.stats.attackRange.flat %></li>
-        </ul>
+    <p class="lead text-center"><%= champion.lore %></p>
+    <hr>
+    <h2 class="text-center mb-3">Base Statistics</h2>
+    <hr>
+    <div class="col mb-3">
+        <p class="list-group-item"><span class="fw-bold">Health:</span> <%= champion.stats.health.flat %> -
+            <%= champion.stats.health.flat + (17 * champion.stats.health.perLevel)%></p>
+        <p class="list-group-item"><span class="fw-bold">Health Per Level:</span> <%= champion.stats.health.perLevel %>
+        </p>
+        <p class="list-group-item"><span class="fw-bold">Health Regen (Per 5s):</span>
+            <%= champion.stats.healthRegen.flat %> -
+            <%= champion.stats.healthRegen.flat + (champion.stats.healthRegen.perLevel * 17) %></p>
+        <p class="list-group-item"><span class="fw-bold">Health Regen Per Level:</span>
+            <%= champion.stats.healthRegen.perLevel %></p>
+        <% if (champion.stats.mana.flat == 0 && champion.stats.manaRegen.flat == 0) { %>
+        <p class="list-group-item"><span class="fw-bold">Mana:</span> N/A </p>
+        <p class="list-group-item"><span class="fw-bold">Mana Regen:</span> N/A</p>
+        <% } else {%>
+        <p class="list-group-item"><span class="fw-bold">Mana:</span> <%= champion.stats.mana.flat%> -
+            <%= champion.stats.mana.flat + (17 * champion.stats.mana.perLevel)%></p>
+        <p class="list-group-item"><span class="fw-bold">Mana Regen (Per 5s):</span>
+            <%= champion.stats.manaRegen.flat %> -
+            <%= champion.stats.manaRegen.flat + (17 * champion.stats.manaRegen.perLevel)%></p>
+        <p class="list-group-item"><span class="fw-bold">Mana Regen Per Level:</span>
+            <%= champion.stats.manaRegen.perLevel%></p>
+        <% } %>
+    </div>
+    <div class="col mb-3">
+        <p class="list-group-item"><span class="fw-bold">Armor:</span> <%= champion.stats.armor.flat %> -
+            <%= champion.stats.armor.flat + (17 * champion.stats.armor.perLevel)%></p>
+        <p class="list-group-item"><span class="fw-bold">Magic Resistance:</span>
+            <%= champion.stats.magicResistance.flat %> -
+            <%= champion.stats.magicResistance.flat + (17 * champion.stats.magicResistance.perLevel)%></p>
+        <p class="list-group-item"><span class="fw-bold">Attack Damage:</span> <%= champion.stats.attackDamage.flat %> -
+            <%= champion.stats.attackDamage.flat + (17 * champion.stats.attackDamage.perLevel)%></p>
+        <p class="list-group-item"><span class="fw-bold">Movement Speed:</span> <%= champion.stats.movespeed.flat %></p>
+        <p class="list-group-item"><span class="fw-bold">Attack Speed:</span> <%= champion.stats.attackSpeed.flat %>% -
+            <%= champion.stats.attackSpeed.flat + (17 * champion.stats.attackSpeed.perLevel)%>%</p>
+        <p class="list-group-item"><span class="fw-bold">Attack Speed Ratio:</span>
+            <%= champion.stats.attackSpeedRatio.flat.toFixed(2) %>
+        </p>
+    </div>
+    <div class="col mb-3">
+        <p class="list-group-item"><span class="fw-bold">Critical Strike Damage:</span>
+            <%= champion.stats.criticalStrikeDamage.flat %></p>
+        <p class="list-group-item"><span class="fw-bold">Attack Cast Time:</span>
+            <%= champion.stats.attackCastTime.flat.toFixed(2) %></p>
+        <p class="list-group-item"><span class="fw-bold">Attack Total Time:</span>
+            <%= champion.stats.attackTotalTime.flat.toFixed(2) %>
+        </p>
+        <p class="list-group-item"><span class="fw-bold">Attack Delay Offset:</span>
+            <%= champion.stats.attackDelayOffset.flat.toFixed(2) %>
+        </p>
+        <p class="list-group-item"><span class="fw-bold">Attack Range:</span> <%= champion.stats.attackRange.flat %></p>
+    </div>
+    <div class="col mb-3">
+        <p class="list-group-item"><span class="fw-bold">Acquisition Radius:</span>
+            <%= champion.stats.acquisitionRadius.flat %></p>
+        <p class="list-group-item"><span class="fw-bold">Selection Radius:</span>
+            <%= champion.stats.selectionRadius.flat %></p>
+        <p class="list-group-item"><span class="fw-bold">Pathing Radius:</span> <%= champion.stats.pathingRadius.flat %>
+        </p>
+        <p class="list-group-item"><span class="fw-bold">Gameplay Radius:</span>
+            <%= champion.stats.gameplayRadius.flat %></p>
     </div>
 </div>
