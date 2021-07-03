@@ -14,9 +14,18 @@ const NA1 = 'na1.api.riotgames.com';
 const championsData = 'http://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json'
 
 app.get('/', async(req, res) => {
-    const response = await fetch(championsData);
-    const champions = await response.json();   
-    res.render('home', {champions});
+    // const response = await fetch(championsData);
+    // const champions = await response.json();   
+    // res.render('home', {champions});
+
+    await fetch(championsData).then(async response => {
+        try {
+            const champions = await response.json(); 
+            res.render('home', {champions});
+        } catch(error) {
+            console.log(error);
+        }
+    })
 })
 
 app.get('/:champName', async(req, res) => {
