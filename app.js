@@ -19,18 +19,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/champions', async(req, res) => {
-    // const response = await fetch(championsData);
-    // const champions = await response.json();   
-    // res.render('home', {champions});
-
-    await fetch(championsData).then(async response => {
-        try {
-            const champions = await response.json(); 
-            res.render('champion/champions', {champions});
-        } catch(error) {
-            console.log(error);
-        }
-    })
+    const response = await fetch(championsData);
+    const champions = await response.json();   
+    res.render('champion/champions', {champions});
 })
 
 app.get('/champions/:champName', async(req, res) => {
