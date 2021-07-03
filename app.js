@@ -9,6 +9,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const NA1 = 'na1.api.riotgames.com';
 const championsData = 'http://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json'
