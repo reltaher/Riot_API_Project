@@ -41,8 +41,9 @@
         <p class="list-group-item"><span class="fw-bold">Attack Damage:</span> <%= champion.stats.attackDamage.flat %> -
             <%= champion.stats.attackDamage.flat + (17 * champion.stats.attackDamage.perLevel)%></p>
         <p class="list-group-item"><span class="fw-bold">Movement Speed:</span> <%= champion.stats.movespeed.flat %></p>
-        <p class="list-group-item"><span class="fw-bold">Attack Speed:</span> <%= champion.stats.attackSpeed.flat %>% -
-            <%= champion.stats.attackSpeed.flat + (17 * champion.stats.attackSpeed.perLevel)%>%</p>
+        <p class="list-group-item"><span class="fw-bold">Attack Speed:</span>
+            <%= champion.stats.attackSpeed.flat.toFixed(3) %>% -
+            <%= (champion.stats.attackSpeed.flat + (17 * champion.stats.attackSpeed.perLevel)).toFixed(3)%>%</p>
         <p class="list-group-item"><span class="fw-bold">Attack Speed Ratio:</span>
             <%= champion.stats.attackSpeedRatio.flat.toFixed(2) %>
         </p>
