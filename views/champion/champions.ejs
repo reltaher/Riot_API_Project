@@ -1,0 +1,14 @@
+<% layout('layouts/boilerplate') %>
+    <h1 class="text-center mb-3">All Champions</h1>
+    <div class="row border mb-3">
+        <% Object.values(champions).forEach((champion) => { %>
+        <div class="container mt-3" style="width: 10rem;">
+            <a href="/champions/<%= champion.name %>">
+                <img src="<%= champion.icon %>" class="img-thumbnail" alt="<%= champion.name %>">
+            </a>
+            <div class="card-body">
+                <p class="text-center"><%= champion.name %></p>
+            </div>
+        </div>
+        <% }) %>
+    </div>

@@ -1,16 +1,8 @@
-<% layout('layouts/boilerplate') %>
-<div class="container">
-    <h1 class="text-center mb-3">All Champions</h1>
-    <div class="row border mb-3">
-        <% Object.values(champions).forEach((champion) => { %>
-        <div class="container mt-3" style="width: 10rem;">
-            <a href="/<%= champion.name %>">
-                <img src="<%= champion.icon %>" class="img-thumbnail" alt="<%= champion.name %>">
-            </a>
-            <div class="card-body">
-                <p class="text-center"><%= champion.name %></p>
-            </div>
-        </div>
-        <% }) %>
-    </div>
+<% layout('/layouts/boilerplate') %>
+<div class="px-3">
+    <h1>Riot API Project</h1>
+    <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+    </form>
 </div>
