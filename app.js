@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const fetch = require('node-fetch');
 const engine = require('ejs-mate');
@@ -46,6 +50,17 @@ app.get('/champions/:champName', async(req, res) => {
     const response = await fetch(championData);
     const champion = await response.json(); 
     res.render('champion/championPage', {champion});
+})
+
+app.get('/:summonerName', async(req, res) => {
+    const {summonerName} = req.query;
+    console.log(summonerName);
+    const apikey = process.env.RIOT_API_KEY;
+    console.log(apikey);
+    const response = await fetch(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${apikey}`)
+    const summoner = await response.json();
+    res.json(summoner);
+    //res.render('summoners/summonerPage')
 })
 
 app.listen(3000, () => {

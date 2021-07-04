@@ -24,8 +24,9 @@
         </header>
         <main class="px-3">
             <h1 class="mb-3">Riot API Project</h1>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="/summoners/" method="GET">
+                <input class="form-control me-2" type="search" placeholder="Search" name="summonerName"
+                    aria-label="Search">
                 <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
         </main>
