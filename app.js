@@ -57,9 +57,11 @@ app.get('/:summonerName', async(req, res) => {
     console.log(summonerName);
     const apikey = process.env.RIOT_API_KEY;
     console.log(apikey);
-    const response = await fetch(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${apikey}`)
-    const summoner = await response.json();
-    res.json(summoner);
+    const accountInfo = await fetch(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${apikey}`)
+    const summonerAccountInfo = await accountInfo.json();
+    const rankedInfo = await fetch(`https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerAccountInfo.id}?api_key=${apikey}`)
+    const summonerRankedInfo = await rankedInfo.json();
+    res.json(summonerRankedInfo);
     //res.render('summoners/summonerPage')
 })
 
