@@ -55,16 +55,35 @@ app.get('/champions/:champName', async(req, res) => {
 
 app.get('/:summonerName', async(req, res) => {
     const {summonerName} = req.query;
-    console.log(summonerName);
+    //console.log(summonerName);
     const apikey = process.env.RIOT_API_KEY;
-    console.log(apikey);
+    //console.log(apikey);
+    if (req.query) {
     const accountInfo = await fetch(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${apikey}`)
     const summonerAccountInfo = await accountInfo.json();
+    //console.log(summonerAccountInfo);
     const rankedInfo = await fetch(`https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerAccountInfo.id}?api_key=${apikey}`)
     const summonerRankedInfo = await rankedInfo.json();
-    console.log(summonerRankedInfo);
-    //res.json(summonerRankedInfo);
-    res.render('summoners/summonerPage', {summonerRankedInfo, helper: romanToNumeral});
+    //console.log(summonerRankedInfo);
+    const matchHistoryID = await fetch(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${summonerAccountInfo.puuid}/ids?api_key=${apikey}`);
+    const summonerMatchHistoryID = await matchHistoryID.json();
+    //console.log(summonerMatchHistoryID);
+
+    const championsResponse = await fetch(championsData);
+    const champions = await championsResponse.json();
+    
+    let summonerMatchHistory;
+    let matchHistories = [];
+    for (let match of summonerMatchHistoryID) {
+        const matchHistory = `https://americas.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${apikey}`;
+        const matchHistoryResponse = await fetch(matchHistory);
+        summonerMatchHistory = await matchHistoryResponse.json();
+        matchHistories.push(summonerMatchHistory);
+    }
+    //console.log(matchHistories.length);
+    //res.json(summonerMatchHistory);
+    res.render('summoners/summonerPage', {summonerAccountInfo, summonerRankedInfo, matchHistories, champions,  helper: romanToNumeral});
+    }
 })
 
 app.listen(3000, () => {
