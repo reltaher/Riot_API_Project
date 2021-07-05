@@ -6,6 +6,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const engine = require('ejs-mate');
 const path = require('path');
+const romanToNumeral = require('./public/scripts/helper');
 const app = express();
 
 app.engine('ejs', engine);
@@ -63,7 +64,7 @@ app.get('/:summonerName', async(req, res) => {
     const summonerRankedInfo = await rankedInfo.json();
     console.log(summonerRankedInfo);
     //res.json(summonerRankedInfo);
-    res.render('summoners/summonerPage', {summonerRankedInfo});
+    res.render('summoners/summonerPage', {summonerRankedInfo, helper: romanToNumeral});
 })
 
 app.listen(3000, () => {

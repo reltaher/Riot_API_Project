@@ -1,5 +1,10 @@
 <% layout('/layouts/boilerplate') %>
-<h1><%= summonerRankedInfo[0].summonerName %> </h1>
-<h2><%= summonerRankedInfo[0].tier %> <%= summonerRankedInfo[0].rank %> </h2>
-<h2><%= summonerRankedInfo[0].leaguePoints %> LP</h2>
-<h2>Wins:<%= summonerRankedInfo[0].wins %> Losses: <%= summonerRankedInfo[0].losses %> </h2>
+<% for (let summoner of summonerRankedInfo) { %>
+<h1><%= summoner.summonerName %> </h1>
+<h2><%= summoner.queueType.substring(0, 11).replace('_', ' ') %> </h2>
+<h2><%= summoner.tier %> <%= summoner.rank %> </h2>
+<img src="/icons/ranked_emblems/<%=summoner.tier%>_<%=helper.romanToInt(summoner.rank)%>.png" alt="Diamond 4">
+<h2><%= summoner.leaguePoints %> LP</h2>
+<h2>Wins:<%= summoner.wins %> Losses: <%= summoner.losses %> </h2>
+<h2>Win Ratio: <%= Math.round(((summoner.wins / (summoner.wins + summoner.losses))*100)) %> % </h2>
+<% } %>
