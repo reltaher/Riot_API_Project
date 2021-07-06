@@ -71,7 +71,7 @@ app.get('/:summonerName', async(req, res) => {
 
     const championsResponse = await fetch(championsData);
     const champions = await championsResponse.json();
-    
+
     let summonerMatchHistory;
     let matchHistories = [];
     for (let match of summonerMatchHistoryID) {
@@ -81,7 +81,7 @@ app.get('/:summonerName', async(req, res) => {
         matchHistories.push(summonerMatchHistory);
     }
     //console.log(matchHistories.length);
-    //res.json(summonerMatchHistory);
+    //res.json(matchHistories);
     res.render('summoners/summonerPage', {summonerAccountInfo, summonerRankedInfo, matchHistories, champions,  helper: romanToNumeral});
     }
 })

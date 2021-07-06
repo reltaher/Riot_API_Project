@@ -18,9 +18,15 @@
     <% } %>
     <% }) %>
     <div class="card-body">
+        <% if(matchHistory.info.queueId === 400) { %>
+        <h5 class="card-title">Normal</h5>
+        <% } else if (matchHistory.info.queueId === 420) { %>
+        <h5 class="card-title">Ranked Solo</h5>
+        <% else if(matchHistory.info.queueId === 440) { %>
+        <h5 class="card-title">Ranked Flex</h5>
+        <% } else { %>
         <h5 class="card-title"><%= matchHistory.info.gameMode %> </h5>
-
-
+        <% } %>
         <p class="card-text"><%= player.championName %></p>
         <% } %>
         <% } %>
