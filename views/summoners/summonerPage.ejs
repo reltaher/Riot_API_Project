@@ -9,12 +9,24 @@
 <h2>Win Ratio: <%= Math.round(((summoner.wins / (summoner.wins + summoner.losses))*100)) %> % </h2>
 <% } %>
 <% for (let matchHistory of matchHistories) {%>
-<div class="card" style="width: 10rem;">
+<div class="container" style="width: 10rem;">
     <% for (let player of matchHistory.info.participants) { %>
     <% if(player.summonerId === summonerAccountInfo.id) { %>
     <% Object.values(champions).forEach((champion) => { %>
     <% if(player.championId === champion.id) { %>
-    <img class="card-img-top" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+    <img class="card-img-top mb-1" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+    <% } %>
+    <% }) %>
+    <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
+    <% if(player.summoner1Id == summonerSpell.key) { %>
+    <img src="http://ddragon.leagueoflegends.com/cdn/11.13.1/img/spell/<%= summonerSpell.image.full %>"
+        alt="<%= summonerSpell.name %>">
+    <% } %>
+    <% }) %>
+    <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
+    <% if(player.summoner2Id == summonerSpell.key) { %>
+    <img src="http://ddragon.leagueoflegends.com/cdn/11.13.1/img/spell/<%= summonerSpell.image.full %>"
+        alt="<%= summonerSpell.name %>">
     <% } %>
     <% }) %>
     <div class="card-body">
