@@ -27,15 +27,16 @@
         <% } else { %>
         <h5 class="card-title"><%= matchHistory.info.gameMode %> </h5>
         <% } %>
+        <p class="card-text"><%= player.championName %></p>
         <% let hours = Math.floor((Date.now() - matchHistory.info.gameCreation) / (1000 * 60 * 60))%>
         <% let days =  Math.floor((Date.now() - matchHistory.info.gameCreation) / (1000 * 60 * 60 * 24))%>
         <% if (hours < 24) { %>
         <div class="card-text"><%= hours %>
             hours ago </div>
         <% } else { %>
-        <div class="card-text">
+        <p class="card-text">
             <%= days === 1 ? days + ' day ago' : days + ' days ago' %>
-        </div>
+        </p>
         <% } %>
         <hr>
         <% if (player.win === true) { %>
@@ -43,7 +44,6 @@
         <% } else { %>
         <p class="card-text text-danger">Defeat</p>
         <% } %>
-        <p class="card-text"><%= player.championName %></p>
         <% } %>
         <% } %>
     </div>
