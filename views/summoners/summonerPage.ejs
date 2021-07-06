@@ -37,6 +37,12 @@
             <%= days === 1 ? days + ' day ago' : days + ' days ago' %>
         </div>
         <% } %>
+        <hr>
+        <% if (player.win === true) { %>
+        <p class="card-text text-primary">Victory</p>
+        <% } else { %>
+        <p class="card-text text-danger">Defeat</p>
+        <% } %>
         <p class="card-text"><%= player.championName %></p>
         <% } %>
         <% } %>
