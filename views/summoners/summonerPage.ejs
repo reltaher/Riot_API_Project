@@ -44,6 +44,8 @@
         <% } else { %>
         <p class="card-text text-danger">Defeat</p>
         <% } %>
+        <p class="card-text"> <%= Math.floor(matchHistory.info.gameDuration / (1000 * 60)) %>m
+            <%= Math.floor((matchHistory.info.gameDuration / 1000) % 60) %>s </p>
         <% } %>
         <% } %>
     </div>
