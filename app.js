@@ -89,7 +89,6 @@ app.get('/:summonerName', async(req, res) => {
         matchHistories.push(summonerMatchHistory);
     }
 
-    //console.log(matchHistories.length);
     //res.json(matchHistories);
     res.render('summoners/summonerPage', {summonerAccountInfo, summonerRankedInfo, matchHistories, summonerSpells, champions, runes, helper: romanToNumeral});
     }
