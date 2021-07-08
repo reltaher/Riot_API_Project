@@ -92,3 +92,24 @@ game-status {
     background-color: #191937;
     border-radius: 3px;
 }
+
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.kda {
+    margin-bottom: 1px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+}
+
+.kda-ratio, .kill-participation {
+    margin-top: 2px;
+    line-height: 13px;
+    font-size: 12px;
+    font-weight: 700;
+}

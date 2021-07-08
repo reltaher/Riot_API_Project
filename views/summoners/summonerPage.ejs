@@ -101,6 +101,39 @@
             <% } %>
             <% } %>
         </div>
+
+        <div class="stats-container">
+            <% for (let player of matchHistory.info.participants) { %>
+            <% if(player.summonerId === summonerAccountInfo.id) { %>
+            <div class="kda"><%= player.kills %> / <%= player.deaths %> / <%= player.assists %></div>
+            <div class="kda-ratio"><%= ((player.kills + player.assists) / player.deaths).toFixed(2) %> KDA </div>
+            <% } %>
+            <% } %>
+
+            <% let team1Kills = 0 %>
+            <% let team2Kills = 0 %>
+            <% for (let player of matchHistory.info.participants) { %>
+            <% if(player.teamId === 100) { %>
+            <% team1Kills += player.kills %>
+            <% } else if (player.teamId === 200) { %>
+            <% team2Kills += player.kills %>
+            <% } %>
+            <% } %>
+
+            <% for (let player of matchHistory.info.participants) { %>
+            <% if(player.summonerId === summonerAccountInfo.id) { %>
+            <% if(player.teamId === 100) { %>
+            <div class="kill-participation"><%= Math.round(((player.kills + player.assists) / team1Kills) * 100) %>%
+                Kill Participation
+            </div>
+            <% } else if (player.teamId === 200) { %>
+            <div class="kill-participation"><%= Math.round(((player.kills + player.assists) / team2Kills) * 100) %>%
+                Kill Participation %> </div>
+            <% } %>
+            <% } %>
+            <% } %>
+        </div>
+
     </div>
 </div>
 <hr>
