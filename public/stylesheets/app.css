@@ -62,6 +62,19 @@ game-status {
     overflow: hidden;
 }
 
+.champion-level {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    border-radius: 3px;
+    background-color: #191937;
+    font-size: 10px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+}
+
 .summoner-spells {
     display: flex;
     flex-direction: column;
@@ -107,7 +120,8 @@ game-status {
     line-height: 17px;
 }
 
-.kda-ratio, .kill-participation {
+.kda-ratio,
+.kill-participation {
     margin-top: 2px;
     line-height: 13px;
     font-size: 12px;

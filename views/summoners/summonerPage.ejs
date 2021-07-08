@@ -59,6 +59,7 @@
             <% if(player.championId === champion.id) { %>
             <div class="champion">
                 <img class="champion-image" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+                <div class="champion-level"><%= player.champLevel %> </div>
             </div>
             <% } %>
             <% }) %>
