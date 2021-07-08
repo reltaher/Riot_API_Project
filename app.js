@@ -75,6 +75,11 @@ app.get('/:summonerName', async(req, res) => {
     const summonerSpellResponse = await fetch('http://ddragon.leagueoflegends.com/cdn/11.13.1/data/en_US/summoner.json');
     const summonerSpells = await summonerSpellResponse.json();
 
+    const runesResponse = await fetch('http://ddragon.leagueoflegends.com/cdn/11.13.1/data/en_US/runesReforged.json');
+    const runes = await runesResponse.json();
+
+
+
     let summonerMatchHistory;
     let matchHistories = [];
     for (let match of summonerMatchHistoryID) {
@@ -83,9 +88,10 @@ app.get('/:summonerName', async(req, res) => {
         summonerMatchHistory = await matchHistoryResponse.json();
         matchHistories.push(summonerMatchHistory);
     }
+
     //console.log(matchHistories.length);
     //res.json(matchHistories);
-    res.render('summoners/summonerPage', {summonerAccountInfo, summonerRankedInfo, matchHistories, summonerSpells, champions,  helper: romanToNumeral});
+    res.render('summoners/summonerPage', {summonerAccountInfo, summonerRankedInfo, matchHistories, summonerSpells, champions, runes, helper: romanToNumeral});
     }
 })
 

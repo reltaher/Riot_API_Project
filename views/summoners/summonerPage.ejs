@@ -1,65 +1,107 @@
 <% layout('/layouts/boilerplate') %>
+
 <% for (let summoner of summonerRankedInfo) { %>
-<h1><%= summoner.summonerName %> </h1>
-<h2><%= summoner.queueType.substring(0, 11).replace('_', ' ') %> </h2>
-<h2><%= summoner.tier %> <%= summoner.rank %> </h2>
-<img src="/icons/ranked_emblems/<%=summoner.tier%>_<%=helper.romanToInt(summoner.rank)%>.png" alt="Diamond 4">
-<h2><%= summoner.leaguePoints %> LP</h2>
-<h2>Wins:<%= summoner.wins %> Losses: <%= summoner.losses %> </h2>
-<h2>Win Ratio: <%= Math.round(((summoner.wins / (summoner.wins + summoner.losses))*100)) %> % </h2>
+<div class="">
+    <h1><%= summoner.summonerName %> </h1>
+    <h2><%= summoner.queueType.substring(0, 11).replace('_', ' ') %> </h2>
+    <h2><%= summoner.tier %> <%= summoner.rank %> </h2>
+    <img src="/icons/ranked_emblems/<%=summoner.tier%>_<%=helper.romanToInt(summoner.rank)%>.png" alt="Diamond 4">
+    <h2><%= summoner.leaguePoints %> LP</h2>
+    <h2>Wins:<%= summoner.wins %> Losses: <%= summoner.losses %> </h2>
+    <h2>Win Ratio: <%= Math.round(((summoner.wins / (summoner.wins + summoner.losses))*100)) %> % </h2>
+</div>
 <% } %>
+
 <% for (let matchHistory of matchHistories) {%>
-<div class="container" style="width: 10rem;">
-    <% for (let player of matchHistory.info.participants) { %>
-    <% if(player.summonerId === summonerAccountInfo.id) { %>
-    <% Object.values(champions).forEach((champion) => { %>
-    <% if(player.championId === champion.id) { %>
-    <img class="card-img-top mb-1" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
-    <% } %>
-    <% }) %>
-    <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
-    <% if(player.summoner1Id == summonerSpell.key) { %>
-    <img src="http://ddragon.leagueoflegends.com/cdn/11.13.1/img/spell/<%= summonerSpell.image.full %>"
-        alt="<%= summonerSpell.name %>">
-    <% } %>
-    <% }) %>
-    <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
-    <% if(player.summoner2Id == summonerSpell.key) { %>
-    <img src="http://ddragon.leagueoflegends.com/cdn/11.13.1/img/spell/<%= summonerSpell.image.full %>"
-        alt="<%= summonerSpell.name %>">
-    <% } %>
-    <% }) %>
-    <div class="card-body">
-        <% if(matchHistory.info.queueId === 400) { %>
-        <h5 class="card-title">Normal</h5>
-        <% } else if (matchHistory.info.queueId === 420) { %>
-        <h5 class="card-title">Ranked Solo</h5>
-        <% } else if(matchHistory.info.queueId === 440) { %>
-        <h5 class="card-title">Ranked Flex</h5>
-        <% } else { %>
-        <h5 class="card-title"><%= matchHistory.info.gameMode %> </h5>
-        <% } %>
-        <p class="card-text"><%= player.championName %></p>
-        <% let hours = Math.floor((Date.now() - matchHistory.info.gameCreation) / (1000 * 60 * 60))%>
-        <% let days =  Math.floor((Date.now() - matchHistory.info.gameCreation) / (1000 * 60 * 60 * 24))%>
-        <% if (hours < 24) { %>
-        <div class="card-text"><%= hours %>
-            hours ago </div>
-        <% } else { %>
-        <p class="card-text">
-            <%= days === 1 ? days + ' day ago' : days + ' days ago' %>
-        </p>
-        <% } %>
-        <hr>
-        <% if (player.win === true) { %>
-        <p class="card-text text-primary">Victory</p>
-        <% } else { %>
-        <p class="card-text text-danger">Defeat</p>
-        <% } %>
-        <p class="card-text"> <%= Math.floor(matchHistory.info.gameDuration / (1000 * 60)) %>m
-            <%= Math.floor((matchHistory.info.gameDuration / 1000) % 60) %>s </p>
+<div class="match-history mb-3">
+    <div class="content-container">
+        <% for (let player of matchHistory.info.participants) { %>
+        <% if(player.summonerId === summonerAccountInfo.id) { %>
+        <div class="gametype-info">
+            <div class="gametype-info">
+                <% if(matchHistory.info.queueId === 400) { %>
+                <div class="queue-type">Normal</div>
+                <% } else if (matchHistory.info.queueId === 420) { %>
+                <div class="queue-type">Ranked Solo</div>
+                <% } else if(matchHistory.info.queueId === 440) { %>
+                <div class="queue-type">Ranked Flex</div>
+                <% } else { %>
+                <div class="queue-type"><%= matchHistory.info.gameMode %> </div>
+                <% } %>
+
+                <% let hours = Math.floor((Date.now() - matchHistory.info.gameCreation) / (1000 * 60 * 60))%>
+                <% let days =  Math.floor((Date.now() - matchHistory.info.gameCreation) / (1000 * 60 * 60 * 24))%>
+                <% if (hours < 24) { %>
+                <div class="time-ago"><%= hours === 1 ? hours + ' hour ago' : hours + ' hour ago' %></div>
+                <% } else { %>
+                <div class="time-ago"><%= days === 1 ? days + ' day ago' : days + ' days ago' %></div>
+                <% } %>
+            </div>
+
+            <div class="gametype-info">
+                <% if (player.win === true) { %>
+                <div class="game-status text-primary">Victory</div>
+                <% } else { %>
+                <div class="game-status text-danger">Defeat</div>
+                <% } %>
+                <div class="game-duration"> <%= Math.floor(matchHistory.info.gameDuration / (1000 * 60)) %>m
+                    <%= Math.floor((matchHistory.info.gameDuration / 1000) % 60) %>s </div>
+            </div>
+
+        </div>
         <% } %>
         <% } %>
+        <div class="champion-container">
+            <% for (let player of matchHistory.info.participants) { %>
+            <% if(player.summonerId === summonerAccountInfo.id) { %>
+
+            <% Object.values(champions).forEach((champion) => { %>
+            <% if(player.championId === champion.id) { %>
+            <div class="champion">
+                <img class="champion-image" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+            </div>
+            <% } %>
+            <% }) %>
+            <div class="summoner-spells">
+                <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
+                <% if(player.summoner1Id == summonerSpell.key) { %>
+                <img class="summoner-spell-image mb-1"
+                    src="http://ddragon.leagueoflegends.com/cdn/11.13.1/img/spell/<%= summonerSpell.image.full %>"
+                    alt="<%= summonerSpell.name %>">
+                <% } %>
+                <% }) %>
+                <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
+                <% if(player.summoner2Id == summonerSpell.key) { %>
+                <img class="summoner-spell-image"
+                    src="http://ddragon.leagueoflegends.com/cdn/11.13.1/img/spell/<%= summonerSpell.image.full %>"
+                    alt="<%= summonerSpell.name %>">
+                <% } %>
+                <% }) %>
+            </div>
+            <div class="runes">
+                <% for (let rune of runes) { %>
+                <% for (let slots of rune.slots) { %>
+                <% for (let slotRunes of slots.runes) { %>
+                <% if(player.perks.styles[0].selections[0].perk === slotRunes.id) { %>
+                <img class="rune-image mb-1" src="http://ddragon.leagueoflegends.com/cdn/img/<%= slotRunes.icon %> "
+                    alt="<%= slotRunes.name %>">
+                <% } %>
+
+                <% } %>
+                <% } %>
+                <% } %>
+                <% for (let rune of runes) { %>
+                <% if(player.perks.styles[1].style === rune.id) { %>
+                <img class="rune-image" src="http://ddragon.leagueoflegends.com/cdn/img/<%= rune.icon %> "
+                    alt="<%= rune.key %>">
+                <% } %>
+                <% } %>
+
+            </div>
+            <% } %>
+            <% } %>
+        </div>
     </div>
 </div>
+<hr>
 <% } %>
