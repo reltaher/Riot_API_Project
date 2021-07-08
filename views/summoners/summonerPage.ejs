@@ -141,7 +141,22 @@
             <% } %>
             <% } %>
         </div>
-
+        <div class="items-container">
+            <% for (let player of matchHistory.info.participants) { %>
+            <% if(player.summonerId === summonerAccountInfo.id) { %>
+            <div class="item-grid">
+                <div class="item-wrapper">
+                    <img class="item-image" src="/icons/items/<%= player.item0 %>.png" alt="<%= player.item0 %>">
+                    <img class="item-image" src="/icons/items/<%= player.item1 %>.png" alt="<%= player.item1 %>">
+                    <img class="item-image" src="/icons/items/<%= player.item2 %>.png" alt="<%= player.item2 %>">
+                    <img class="item-image" src="/icons/items/<%= player.item3 %>.png" alt="<%= player.item3 %>">
+                    <img class="item-image" src="/icons/items/<%= player.item4 %>.png" alt="<%= player.item4 %>">
+                    <img class="item-image" src="/icons/items/<%= player.item5 %>.png" alt="<%= player.item5 %>">
+                </div>
+            </div>
+            <% } %>
+            <% } %>
+        </div>
     </div>
 </div>
 <hr>
