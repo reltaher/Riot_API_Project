@@ -72,10 +72,10 @@ app.get('/:summonerName', async(req, res) => {
     const championsResponse = await fetch(championsData);
     const champions = await championsResponse.json();
 
-    const summonerSpellResponse = await fetch('http://ddragon.leagueoflegends.com/cdn/11.13.1/data/en_US/summoner.json');
+    const summonerSpellResponse = await fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/summoner.json');
     const summonerSpells = await summonerSpellResponse.json();
 
-    const runesResponse = await fetch('http://ddragon.leagueoflegends.com/cdn/11.13.1/data/en_US/runesReforged.json');
+    const runesResponse = await fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/runesReforged.json');
     const runes = await runesResponse.json();
 
 
