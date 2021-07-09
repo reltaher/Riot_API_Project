@@ -170,3 +170,45 @@ game-status {
     justify-content: center;
     margin-left: 4px;
 }
+
+.players-container {
+    display: flex;
+}
+
+.team-list {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.summoner-entry {
+    display: flex;
+    align-items: center;
+}
+
+.champion-face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    height: 14px;
+    width: 14px;
+    border-radius: 2px;
+    border: 1px solid #383864;
+    overflow: hidden;
+}
+
+.summoner-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 60px;
+}
+
+.summoner-name a {
+    font-size: 10px;
+    font-weight: 500;
+    color: #222;
+    cursor: pointer;
+}

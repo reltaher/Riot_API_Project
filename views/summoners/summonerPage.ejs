@@ -205,6 +205,40 @@
                 <% } %>
             </div>
         </div>
+        <div class="players-container">
+            <div class="team-list">
+                <% for (let player of matchHistory.info.participants) { %>
+                <% if (player.teamId === 100) { %>
+                <div class="summoner-entry">
+                    <% Object.values(champions).forEach((champion) => { %>
+                    <% if(player.championId === champion.id) { %>
+                    <img class="champion-face" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+                    <% } %>
+                    <% }) %>
+                    <div class="summoner-name">
+                        <a href="/summoners/?summonerName=<%= player.summonerName %>"><%= player.summonerName %></a>
+                    </div>
+                </div>
+                <% } %>
+                <% } %>
+            </div>
+            <div class="team-list">
+                <% for (let player of matchHistory.info.participants) { %>
+                <% if (player.teamId === 200) { %>
+                <div class="summoner-entry">
+                    <% Object.values(champions).forEach((champion) => { %>
+                    <% if(player.championId === champion.id) { %>
+                    <img class="champion-face" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+                    <% } %>
+                    <% }) %>
+                    <div class="summoner-name">
+                        <a href="/summoners/?summonerName=<%= player.summonerName %>"><%= player.summonerName %></a>
+                    </div>
+                </div>
+                <% } %>
+                <% } %>
+            </div>
+        </div>
 
     </div>
 </div>
