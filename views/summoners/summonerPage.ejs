@@ -141,58 +141,71 @@
             <% } %>
             <% } %>
         </div>
-        <div class="items-container">
-            <% for (let player of matchHistory.info.participants) { %>
-            <% if(player.summonerId === summonerAccountInfo.id) { %>
-            <div class="item-grid">
+        <div class="items">
+            <div class="items-container">
+                <% for (let player of matchHistory.info.participants) { %>
+                <% if(player.summonerId === summonerAccountInfo.id) { %>
+                <div class="item-grid">
 
-                <% if(player.item0 !== 0) { %>
-                <img class="item-wrapper item-image" src="/icons/items/<%= player.item0 %>.png"
-                    alt="<%= player.item0 %>">
-                <% } else { %>
-                <div class=" item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
+                    <% if(player.item0 !== 0) { %>
+                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item0 %>.png"
+                        alt="<%= player.item0 %>">
+                    <% } else { %>
+                    <div class=" item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
+                    <% } %>
+
+                    <% if(player.item1 !== 0) { %>
+                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item1 %>.png"
+                        alt="<%= player.item1 %>">
+                    <% } else { %>
+                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
+                    <% } %>
+
+                    <% if(player.item2 !== 0) { %>
+                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item2 %>.png"
+                        alt="<%= player.item2 %>">
+                    <% } else { %>
+                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
+                    <% } %>
+
+                    <% if(player.item3 !== 0) { %>
+                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item3 %>.png"
+                        alt="<%= player.item3 %>">
+                    <% } else { %>
+                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
+                    <% } %>
+
+                    <% if(player.item4 !== 0) { %>
+                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item4 %>.png"
+                        alt="<%= player.item4 %>">
+                    <% } else { %>
+                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
+                    <% } %>
+
+                    <% if(player.item5 !== 0) { %>
+                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item5 %>.png"
+                        alt="<%= player.item5 %>">
+                    <% } else { %>
+                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
+                    <% } %>
+                </div>
                 <% } %>
-
-                <% if(player.item1 !== 0) { %>
-                <img class="item-wrapper item-image" src="/icons/items/<%= player.item1 %>.png"
-                    alt="<%= player.item1 %>">
-                <% } else { %>
-                <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
                 <% } %>
-
-                <% if(player.item2 !== 0) { %>
-                <img class="item-wrapper item-image" src="/icons/items/<%= player.item2 %>.png"
-                    alt="<%= player.item2 %>">
-                <% } else { %>
-                <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                <% } %>
-
-                <% if(player.item3 !== 0) { %>
-                <img class="item-wrapper item-image" src="/icons/items/<%= player.item3 %>.png"
-                    alt="<%= player.item3 %>">
-                <% } else { %>
-                <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                <% } %>
-
-                <% if(player.item4 !== 0) { %>
-                <img class="item-wrapper item-image" src="/icons/items/<%= player.item4 %>.png"
-                    alt="<%= player.item4 %>">
-                <% } else { %>
-                <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                <% } %>
-
-                <% if(player.item5 !== 0) { %>
-                <img class="item-wrapper item-image" src="/icons/items/<%= player.item5 %>.png"
-                    alt="<%= player.item5 %>">
-                <% } else { %>
-                <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                <% } %>
-
-
             </div>
-            <% } %>
-            <% } %>
+            <div class="trinket-container">
+                <% for (let player of matchHistory.info.participants) { %>
+                <% if(player.summonerId === summonerAccountInfo.id) { %>
+                <% if(player.item6 !== 0) { %>
+                <img class="item-wrapper item-image" src="/icons/items/<%= player.item6 %>.png"
+                    alt="<%= player.item6 %>">
+                <% } else { %>
+                <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
+                <% } %>
+                <% } %>
+                <% } %>
+            </div>
         </div>
+
     </div>
 </div>
 <hr>
