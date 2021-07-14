@@ -3,6 +3,13 @@
     <div class="summoner-profile-header">
         <% for (let summoner of summonerRankedInfo) { %>
         <div class="summoner-profile">
+            <div class="profile-icon">
+                <div class="profile-icon-border">
+                    <img class="profile-icon-image"
+                        src="http://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/<%= summonerAccountInfo.profileIconId %>.png"
+                        alt="">
+                </div>
+            </div>
             <div class="summoner-profile-info">
                 <div class="summoner-name">
                     <span><%= summoner.summonerName %></span>

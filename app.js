@@ -78,7 +78,7 @@ app.get('/:summonerName', async(req, res) => {
     const runesResponse = await fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/en_US/runesReforged.json');
     const runes = await runesResponse.json();
 
-
+    const profileIconResponse = await fetch(`http://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/${summonerAccountInfo.profileIconId}.png`);
 
     let summonerMatchHistory;
     let matchHistories = [];
