@@ -1,246 +1,321 @@
 <% layout('/layouts/boilerplate') %>
-
-<% for (let summoner of summonerRankedInfo) { %>
-<div class="">
-    <h1><%= summoner.summonerName %> </h1>
-    <h2><%= summoner.queueType.substring(0, 11).replace('_', ' ') %> </h2>
-    <h2><%= summoner.tier %> <%= summoner.rank %> </h2>
-    <img src="/icons/ranked_emblems/<%=summoner.tier%>_<%=helper.romanToInt(summoner.rank)%>.png" alt="Diamond 4">
-    <h2><%= summoner.leaguePoints %> LP</h2>
-    <h2>Wins:<%= summoner.wins %> Losses: <%= summoner.losses %> </h2>
-    <h2>Win Ratio: <%= Math.round(((summoner.wins / (summoner.wins + summoner.losses))*100)) %> % </h2>
-</div>
-<% } %>
-
-<% for (let matchHistory of matchHistories) {%>
-<div class="match-history mb-3">
-    <div class="content-container">
-        <% for (let player of matchHistory.info.participants) { %>
-        <% if(player.summonerId === summonerAccountInfo.id) { %>
-        <div class="gametype-info">
-            <div class="gametype-info">
-                <% if(matchHistory.info.queueId === 400) { %>
-                <div class="queue-type">Normal</div>
-                <% } else if (matchHistory.info.queueId === 420) { %>
-                <div class="queue-type">Ranked Solo</div>
-                <% } else if(matchHistory.info.queueId === 440) { %>
-                <div class="queue-type">Ranked Flex</div>
-                <% } else { %>
-                <div class="queue-type"><%= matchHistory.info.gameMode %> </div>
-                <% } %>
-                <% let seconds = Math.floor((Date.now() - matchHistory.info.gameCreation - matchHistory.info.gameDuration) / 1000) %>
-                <% let minutes = Math.floor((Date.now() - matchHistory.info.gameCreation - matchHistory.info.gameDuration) / (1000 * 60)) %>
-                <% let hours = Math.floor((Date.now() - matchHistory.info.gameCreation - matchHistory.info.gameDuration) / (1000 * 60 * 60))%>
-                <% let days = Math.floor((Date.now() - matchHistory.info.gameCreation - matchHistory.info.gameDuration) / (1000 * 60 * 60 * 24))%>
-                <% if (minutes < 1) { %>
-                <div class="time-ago"><%= seconds === 1 ? seconds + ' second ago' : seconds + ' seconds ago' %></div>
-                <% } else if (hours < 1) { %>
-                <div class="time-ago"><%= minutes === 1 ? minutes + ' minute ago' : minutes + ' minutes ago' %></div>
-                <% } else if (hours < 24) { %>
-                <div class="time-ago"><%= hours === 1 ? hours + ' hour ago' : hours + ' hours ago' %></div>
-                <% } else { %>
-                <div class="time-ago"><%= days === 1 ? days + ' day ago' : days + ' days ago' %></div>
-                <% } %>
+<div class="summoner-profile-container">
+    <div class="summoner-profile-header">
+        <% for (let summoner of summonerRankedInfo) { %>
+        <div class="summoner-profile">
+            <div class="summoner-profile-info">
+                <div class="summoner-name">
+                    <span><%= summoner.summonerName %></span>
+                </div>
             </div>
-
-            <div class="gametype-info">
-                <% if (player.win === true) { %>
-                <div class="game-status text-primary">Victory</div>
-                <% } else { %>
-                <div class="game-status text-danger">Defeat</div>
-                <% } %>
-                <div class="game-duration"> <%= Math.floor(matchHistory.info.gameDuration / (1000 * 60)) %>m
-                    <%= Math.floor((matchHistory.info.gameDuration / 1000) % 60) %>s </div>
-            </div>
-
         </div>
         <% } %>
-        <% } %>
-        <div class="champion-container">
-            <% for (let player of matchHistory.info.participants) { %>
-            <% if(player.summonerId === summonerAccountInfo.id) { %>
-
-            <% Object.values(champions).forEach((champion) => { %>
-            <% if(player.championId === champion.id) { %>
-            <div class="champion">
-                <img class="champion-image" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
-                <div class="champion-level"><%= player.champLevel %> </div>
-            </div>
-            <% } %>
-            <% }) %>
-            <div class="summoner-spells">
-                <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
-                <% if(player.summoner1Id == summonerSpell.key) { %>
-                <img class="summoner-spell-image mb-1"
-                    src="http://ddragon.leagueoflegends.com/cdn/11.14.1/img/spell/<%= summonerSpell.image.full %>"
-                    alt="<%= summonerSpell.name %>">
-                <% } %>
-                <% }) %>
-                <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
-                <% if(player.summoner2Id == summonerSpell.key) { %>
-                <img class="summoner-spell-image"
-                    src="http://ddragon.leagueoflegends.com/cdn/11.14.1/img/spell/<%= summonerSpell.image.full %>"
-                    alt="<%= summonerSpell.name %>">
-                <% } %>
-                <% }) %>
-            </div>
-            <div class="runes">
-                <% for (let rune of runes) { %>
-                <% for (let slots of rune.slots) { %>
-                <% for (let slotRunes of slots.runes) { %>
-                <% if(player.perks.styles[0].selections[0].perk === slotRunes.id) { %>
-                <img class="rune-image mb-1" src="http://ddragon.leagueoflegends.com/cdn/img/<%= slotRunes.icon %> "
-                    alt="<%= slotRunes.name %>">
-                <% } %>
-
-                <% } %>
-                <% } %>
-                <% } %>
-                <% for (let rune of runes) { %>
-                <% if(player.perks.styles[1].style === rune.id) { %>
-                <img class="rune-image" src="http://ddragon.leagueoflegends.com/cdn/img/<%= rune.icon %> "
-                    alt="<%= rune.key %>">
-                <% } %>
-                <% } %>
-
-            </div>
-            <% } %>
-            <% } %>
-        </div>
-
-        <div class="stats-container">
-            <% for (let player of matchHistory.info.participants) { %>
-            <% if(player.summonerId === summonerAccountInfo.id) { %>
-            <div class="kda"><%= player.kills %> / <span class="text-danger"><%= player.deaths %></span> /
-                <%= player.assists %></div>
-            <div class="kda-ratio"><%= ((player.kills + player.assists) / player.deaths).toFixed(2) %> KDA </div>
-            <% } %>
-            <% } %>
-
-            <% let team1Kills = 0 %>
-            <% let team2Kills = 0 %>
-            <% for (let player of matchHistory.info.participants) { %>
-            <% if(player.teamId === 100) { %>
-            <% team1Kills += player.kills %>
-            <% } else if (player.teamId === 200) { %>
-            <% team2Kills += player.kills %>
-            <% } %>
-            <% } %>
-
-            <% for (let player of matchHistory.info.participants) { %>
-            <% if(player.summonerId === summonerAccountInfo.id) { %>
-            <% if(player.teamId === 100) { %>
-            <div class="kill-participation"><%= Math.round(((player.kills + player.assists) / team1Kills) * 100) %>%
-                Kill Participation
-            </div>
-            <% } else if (player.teamId === 200) { %>
-            <div class="kill-participation"><%= Math.round(((player.kills + player.assists) / team2Kills) * 100) %>%
-                Kill Participation %> </div>
-            <% } %>
-            <div class="cs"><%= player.totalMinionsKilled %> CS </div>
-            <% } %>
-            <% } %>
-        </div>
-        <div class="items">
-            <div class="items-container">
-                <% for (let player of matchHistory.info.participants) { %>
-                <% if(player.summonerId === summonerAccountInfo.id) { %>
-                <div class="item-grid">
-
-                    <% if(player.item0 !== 0) { %>
-                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item0 %>.png"
-                        alt="<%= player.item0 %>">
-                    <% } else { %>
-                    <div class=" item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                    <% } %>
-
-                    <% if(player.item1 !== 0) { %>
-                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item1 %>.png"
-                        alt="<%= player.item1 %>">
-                    <% } else { %>
-                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                    <% } %>
-
-                    <% if(player.item2 !== 0) { %>
-                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item2 %>.png"
-                        alt="<%= player.item2 %>">
-                    <% } else { %>
-                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                    <% } %>
-
-                    <% if(player.item3 !== 0) { %>
-                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item3 %>.png"
-                        alt="<%= player.item3 %>">
-                    <% } else { %>
-                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                    <% } %>
-
-                    <% if(player.item4 !== 0) { %>
-                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item4 %>.png"
-                        alt="<%= player.item4 %>">
-                    <% } else { %>
-                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                    <% } %>
-
-                    <% if(player.item5 !== 0) { %>
-                    <img class="item-wrapper item-image" src="/icons/items/<%= player.item5 %>.png"
-                        alt="<%= player.item5 %>">
-                    <% } else { %>
-                    <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                    <% } %>
-                </div>
-                <% } %>
-                <% } %>
-            </div>
-            <div class="trinket-container">
-                <% for (let player of matchHistory.info.participants) { %>
-                <% if(player.summonerId === summonerAccountInfo.id) { %>
-                <% if(player.item6 !== 0) { %>
-                <img class="item-wrapper item-image" src="/icons/items/<%= player.item6 %>.png"
-                    alt="<%= player.item6 %>">
-                <% } else { %>
-                <div class="item-wrapper item-image" style="background-color:rgba(0, 0, 0, 0.5);"></div>
-                <% } %>
-                <% } %>
-                <% } %>
-            </div>
-        </div>
-        <div class="players-container">
-            <div class="team-list">
-                <% for (let player of matchHistory.info.participants) { %>
-                <% if (player.teamId === 100) { %>
-                <div class="summoner-entry">
-                    <% Object.values(champions).forEach((champion) => { %>
-                    <% if(player.championId === champion.id) { %>
-                    <img class="champion-face" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
-                    <% } %>
-                    <% }) %>
-                    <div class="summoner-name">
-                        <a href="/summoners/?summonerName=<%= player.summonerName %>"><%= player.summonerName %></a>
-                    </div>
-                </div>
-                <% } %>
-                <% } %>
-            </div>
-            <div class="team-list">
-                <% for (let player of matchHistory.info.participants) { %>
-                <% if (player.teamId === 200) { %>
-                <div class="summoner-entry">
-                    <% Object.values(champions).forEach((champion) => { %>
-                    <% if(player.championId === champion.id) { %>
-                    <img class="champion-face" src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
-                    <% } %>
-                    <% }) %>
-                    <div class="summoner-name">
-                        <a href="/summoners/?summonerName=<%= player.summonerName %>"><%= player.summonerName %></a>
-                    </div>
-                </div>
-                <% } %>
-                <% } %>
-            </div>
-        </div>
-
     </div>
-</div>
-<hr>
-<% } %>
+    <div class="summoner-profile-main-container">
+        <% for (let summoner of summonerRankedInfo) { %>
+        <div class="ranked-stats-container">
+            <div class="rank-container">
+                <div class="rank-list">
+                    <div class="rank-tile">
+                        <div class="rank-image-container">
+                            <img class="rank-img"
+                                src="/icons/ranked_emblems/<%=summoner.tier%>_<%=helper.romanToInt(summoner.rank)%>.png"
+                                alt="Diamond 4">
+                        </div>
+                        <div>
+                            <div class="queue-type"><%= summoner.queueType.substring(0, 11).replace('_', ' ') %></div>
+                            <div class="summoner-rank"><%= summoner.tier %> <%= helper.romanToInt(summoner.rank) %> /
+                                <%= summoner.leaguePoints %> LP
+                            </div>
+                            <div class="win-loss-ratio">
+                                <%= summoner.wins %>W <%= summoner.losses %>L /
+                                <%= Math.round(((summoner.wins / (summoner.wins + summoner.losses))*100)) %> %
+                                WR
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+        <div class="match-history-container">
+            <% for (let matchHistory of matchHistories) { %>
+            <div class="mb-5">
+                <% for (let player of matchHistory.info.participants) { %>
+                <% if(player.summonerId === summonerAccountInfo.id) { %>
+                <% if (player.win === true) { %>
+                <div class="match-history-card" style="background-color: #a3cfec;">
+                    <% } else { %>
+                    <div class="match-history-card" style="background-color: #e2b6b3;">
+                        <% } %>
+                        <% } %>
+                        <% } %>
+                        <div class="match-summary">
+                            <div class="content-container">
+                                <% for (let player of matchHistory.info.participants) { %>
+                                <% if(player.summonerId === summonerAccountInfo.id) { %>
+                                <div class="group-one">
+                                    <div class="row-one">
+                                        <% if(matchHistory.info.queueId === 400) { %>
+                                        <div class="queue-type">Normal</div>
+                                        <% } else if (matchHistory.info.queueId === 420) { %>
+                                        <div class="queue-type">Ranked Solo</div>
+                                        <% } else if(matchHistory.info.queueId === 440) { %>
+                                        <div class="queue-type">Ranked Flex</div>
+                                        <% } else { %>
+                                        <div class="queue-type"><%= matchHistory.info.gameMode %> </div>
+                                        <% } %>
+
+                                        <% let seconds = Math.floor((Date.now() - matchHistory.info.gameCreation - matchHistory.info.gameDuration) / 1000) %>
+                                        <% let minutes = Math.floor((Date.now() - matchHistory.info.gameCreation - matchHistory.info.gameDuration) / (1000 * 60)) %>
+                                        <% let hours = Math.floor((Date.now() - matchHistory.info.gameCreation - matchHistory.info.gameDuration) / (1000 * 60 * 60))%>
+                                        <% let days = Math.floor((Date.now() - matchHistory.info.gameCreation - matchHistory.info.gameDuration) / (1000 * 60 * 60 * 24))%>
+                                        <% if (minutes < 1) { %>
+                                        <div class="time-ago">
+                                            <%= seconds === 1 ? seconds + ' second ago' : seconds + ' seconds ago' %>
+                                        </div>
+                                        <% } else if (hours < 1) { %>
+                                        <div class="time-ago">
+                                            <%= minutes === 1 ? minutes + ' minute ago' : minutes + ' minutes ago' %>
+                                        </div>
+                                        <% } else if (hours < 24) { %>
+                                        <div class="time-ago">
+                                            <%= hours === 1 ? hours + ' hour ago' : hours + ' hours ago' %>
+                                        </div>
+                                        <% } else { %>
+                                        <div class="time-ago"><%= days === 1 ? days + ' day ago' : days + ' days ago' %>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                    <div class="row-two">
+                                        <% if (player.win === true) { %>
+                                        <div class="game-status text-primary">Victory</div>
+                                        <% } else { %>
+                                        <div class="game-status text-danger">Defeat</div>
+                                        <% } %>
+                                    </div>
+                                    <div class="row-three">
+                                        <div class="game-duration">
+                                            <%= Math.floor(matchHistory.info.gameDuration / (1000 * 60)) %>m
+                                            <%= Math.floor((matchHistory.info.gameDuration / 1000) % 60) %>s </div>
+                                    </div>
+                                </div>
+                                <div class="group-two">
+                                    <div class="row-one">
+                                        <div class="champion">
+                                            <% Object.values(champions).forEach((champion) => { %>
+                                            <% if(player.championId === champion.id) { %>
+                                            <div class="champion-face">
+                                                <img src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+                                            </div>
+
+                                            <div class="champion-level"><%= player.champLevel %> </div>
+                                            <% } %>
+                                            <% }) %>
+                                        </div>
+                                        <div class="summoner-spells">
+                                            <% Object.values(summonerSpells.data).forEach((summonerSpell) => { %>
+                                            <% if(player.summoner1Id == summonerSpell.key) { %>
+                                            <img class="summoner-spell"
+                                                src="http://ddragon.leagueoflegends.com/cdn/11.14.1/img/spell/<%= summonerSpell.image.full %>"
+                                                alt="<%= summonerSpell.name %>">
+                                            <% } %>
+                                            <% if(player.summoner2Id == summonerSpell.key) { %>
+                                            <img class="summoner-spell"
+                                                src="http://ddragon.leagueoflegends.com/cdn/11.14.1/img/spell/<%= summonerSpell.image.full %>"
+                                                alt="<%= summonerSpell.name %>">
+                                            <% } %>
+                                            <% }) %>
+                                        </div>
+                                        <div class="runes">
+                                            <% for (let rune of runes) { %>
+                                            <% for (let slots of rune.slots) { %>
+                                            <% for (let slotRunes of slots.runes) { %>
+                                            <% if(player.perks.styles[0].selections[0].perk === slotRunes.id) { %>
+                                            <div class="rune">
+                                                <img src="http://ddragon.leagueoflegends.com/cdn/img/<%= slotRunes.icon %> "
+                                                    alt="<%= slotRunes.name %>">
+                                            </div>
+                                            <% } %>
+
+                                            <% } %>
+                                            <% } %>
+                                            <% } %>
+                                            <% for (let rune of runes) { %>
+                                            <% if(player.perks.styles[1].style === rune.id) { %>
+                                            <div class="rune rune-substyle">
+                                                <img src="http://ddragon.leagueoflegends.com/cdn/img/<%= rune.icon %> "
+                                                    alt="<%= rune.key %>">
+                                            </div>
+                                            <% } %>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-stats">
+                                    <div class="kda-total">
+                                        <%= player.kills %> <span class="slash">/</span> <span
+                                            class="text-danger"><%= player.deaths %></span> <span class="slash">/</span>
+                                        <%= player.assists %>
+                                    </div>
+                                    <div class="kda-ratio">
+                                        <%= ((player.kills + player.assists) / player.deaths).toFixed(2) %> KDA
+                                    </div>
+                                    <div class="kill-participation">
+                                        <% let team1Kills = 0 %>
+                                        <% let team2Kills = 0 %>
+                                        <% for (let player of matchHistory.info.participants) { %>
+                                        <% if(player.teamId === 100) { %>
+                                        <% team1Kills += player.kills %>
+                                        <% } else if (player.teamId === 200) { %>
+                                        <% team2Kills += player.kills %>
+                                        <% } %>
+                                        <% } %>
+
+                                        <% if(player.teamId === 100) { %>
+                                        <%= Math.round(((player.kills + player.assists) / team1Kills) * 100) %>%
+                                        KP
+                                        <% } else if (player.teamId === 200) { %>
+                                        <%= Math.round(((player.kills + player.assists) / team2Kills) * 100) %>%
+                                        KP
+                                        <% } %>
+
+                                    </div>
+                                    <div class="cs">
+                                        <%= player.totalMinionsKilled %> CS
+                                    </div>
+                                    <div class="multi-kill">
+
+                                    </div>
+                                </div>
+                                <div class="group-three">
+                                    <div class="items">
+                                        <div class="main-items">
+                                            <div class="items-container">
+                                                <% if(player.item0 !== 0) { %>
+                                                <img class="item-wrapper item-image"
+                                                    src="/icons/items/<%= player.item0 %>.png"
+                                                    alt="<%= player.item0 %>">
+                                                <% } else { %>
+                                                <div class=" item-wrapper item-image"
+                                                    style="background-color:rgba(0, 0, 0, 0.5);">
+                                                </div>
+                                                <% } %>
+
+                                                <% if(player.item1 !== 0) { %>
+                                                <img class="item-wrapper item-image"
+                                                    src="/icons/items/<%= player.item1 %>.png"
+                                                    alt="<%= player.item1 %>">
+                                                <% } else { %>
+                                                <div class="item-wrapper item-image"
+                                                    style="background-color:rgba(0, 0, 0, 0.5);">
+                                                </div>
+                                                <% } %>
+
+                                                <% if(player.item2 !== 0) { %>
+                                                <img class="item-wrapper item-image"
+                                                    src="/icons/items/<%= player.item2 %>.png"
+                                                    alt="<%= player.item2 %>">
+                                                <% } else { %>
+                                                <div class="item-wrapper item-image"
+                                                    style="background-color:rgba(0, 0, 0, 0.5);">
+                                                </div>
+                                                <% } %>
+
+                                                <% if(player.item3 !== 0) { %>
+                                                <img class="item-wrapper item-image"
+                                                    src="/icons/items/<%= player.item3 %>.png"
+                                                    alt="<%= player.item3 %>">
+                                                <% } else { %>
+                                                <div class="item-wrapper item-image"
+                                                    style="background-color:rgba(0, 0, 0, 0.5);">
+                                                </div>
+                                                <% } %>
+
+                                                <% if(player.item4 !== 0) { %>
+                                                <img class="item-wrapper item-image"
+                                                    src="/icons/items/<%= player.item4 %>.png"
+                                                    alt="<%= player.item4 %>">
+                                                <% } else { %>
+                                                <div class="item-wrapper item-image"
+                                                    style="background-color:rgba(0, 0, 0, 0.5);">
+                                                </div>
+                                                <% } %>
+
+                                                <% if(player.item5 !== 0) { %>
+                                                <img class="item-wrapper item-image"
+                                                    src="/icons/items/<%= player.item5 %>.png"
+                                                    alt="<%= player.item5 %>">
+                                                <% } else { %>
+                                                <div class="item-wrapper item-image"
+                                                    style="background-color:rgba(0, 0, 0, 0.5);">
+                                                </div>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                        <div class="trinket">
+                                            <div class="items-container">
+                                                <% if(player.item6 !== 0) { %>
+                                                <img class="item-wrapper item-image"
+                                                    src="/icons/items/<%= player.item6 %>.png"
+                                                    alt="<%= player.item6 %>">
+                                                <% } else { %>
+                                                <div class="item-wrapper item-image"
+                                                    style="background-color:rgba(0, 0, 0, 0.5);">
+                                                </div>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="group-four">
+                                    <div class="team-list">
+                                        <% for (let player of matchHistory.info.participants) { %>
+                                        <% if (player.teamId === 100) { %>
+                                        <div class="summoner">
+                                            <% Object.values(champions).forEach((champion) => { %>
+                                            <% if(player.championId === champion.id) { %>
+                                            <div class="champion-face">
+                                                <img src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+                                            </div>
+                                            <% } %>
+                                            <% }) %>
+                                            <div class="summoner-name">
+                                                <a
+                                                    href="/summoners/?summonerName=<%= player.summonerName %>"><%= player.summonerName %></a>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                        <% } %>
+                                    </div>
+                                    <div class="team-list">
+                                        <% for (let player of matchHistory.info.participants) { %>
+                                        <% if (player.teamId === 200) { %>
+                                        <div class="summoner">
+                                            <% Object.values(champions).forEach((champion) => { %>
+                                            <% if(player.championId === champion.id) { %>
+                                            <div class="champion-face">
+                                                <img src=" <%= champion.icon %> " alt=" <%= player.championName %> ">
+                                            </div>
+                                            <% } %>
+                                            <% }) %>
+                                            <div class="summoner-name">
+                                                <a
+                                                    href="/summoners/?summonerName=<%= player.summonerName %>"><%= player.summonerName %></a>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>

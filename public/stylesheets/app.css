@@ -2,57 +2,237 @@
     width: 10rem;
 }
 
-.content-container {
-    display: grid;
-    grid-template-columns: 15% 15% 15% minmax(100px, 20%) minmax(150px, 30%) 4%;
-    grid-template-rows: 50px;
-    align-items: center;
-    width: 100%;
+.summoner-profile-container {
+    position: relative;
 }
 
-.match-history {
+/* SUMMONER PROFILE HEADER */
+
+.summoner-profile-header {
+    margin-top: 30px;
+}
+
+.summoner-profile-header .summoner-profile {
+    display: flex;
+    align-items: flex-end;
+}
+
+.summoner-profile-header .summoner-profile .summoner-profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1;
+    margin-left: 24px;
+}
+
+.summoner-profile-header .summoner-profile .summoner-profile-info .summoner-name {
+    display: flex;
+    align-items: center;
+    font-size: 36px;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.summoner-profile-header .summoner-profile .summoner-profile-info .summoner-name span {
+    max-width: 20ch;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/*SUMMONER PROFILE CONTAINER */
+
+.summoner-profile-main-container {
+    display: grid;
+    grid-template-columns: 312px 1fr;
+    grid-gap: 24px;
+    width: 1016px;
+}
+
+.summoner-profile-container .ranked-stats-container {
+    display: grid;
+    grid-gap: 24px;
+}
+
+.summoner-profile-container .rank-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 24px 24px;
+}
+
+.summoner-profile-container .rank-container .rank-list {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
+    grid-gap: 12px;
+    border: 1px solid black;
+}
+
+.summoner-profile-container .rank-container .rank-list .rank-tile {
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    grid-gap: 12px;
+    align-items: center;
+    padding: 0 12px;
+    height: 78px;
+    border-radius: 6px;
+}
+
+.summoner-profile-container .rank-container .rank-list .rank-tile .queue-type {
+    color: #080808;
+    font-size: 11px;
+}
+
+.summoner-profile-container .rank-container .rank-list .rank-tile .summoner-rank {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.summoner-profile-container .rank-container .rank-list .rank-tile .win-loss-ratio {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.summoner-profile-container .rank-container .rank-list .rank-tile .rank-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summoner-profile-container .rank-container .rank-list .rank-tile .rank-image-container .rank-img {
+    flex: 0 0 48px;
+    width: 48px;
+}
+
+/* MATCH HISTORY SECTION */
+
+.match-history-container {
+    padding: 16px 24px 24px;
+}
+
+.match-history-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.match-summary {
     position: relative;
     display: flex;
     align-items: center;
     width: 100%;
     height: 100px;
     padding: 0 12px;
+    color: #0a0a0a;
 }
 
-.gametype-info {
+.match-summary .content-container {
+    display: grid;
+    grid-template-columns: 16% 19% 15% minmax(120px, 22%) minmax(155px, 31%) 4%;
+    grid-template-rows: 78px;
+    align-items: center;
+    width: 100%;
+}
+
+.match-summary .content-container .group-one {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.queue-type,
-game-status {
-    font-size: 12px;
-    font-weight: 700;
+.match-summary .content-container .group-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.game-duration {
-    font-size: 12px;
-    font-weight: 500;
+.match-summary .post-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.time-ago {
-    font-size: 10px;
-    font-weight: 500;
+.match-summary .group-three {
+    position: relative;
+    left: -4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 12px;
 }
 
-.champion-container {
+.match-summary .group-four {
+    display: flex;
+}
+
+.match-summary .content-container .group-one .row-one {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-summary .content-container .group-one .row-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-summary .content-container .group-one .row-three {
+    display: flex;
+    align-items: center;
+}
+
+.match-summary .content-container .group-two .row-one {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.champion {
+.match-summary .content-container .group-one .row-one .queue-type {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.match-summary .content-container .group-one .row-one .time-ago {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.match-summary .content-container .group-one .row-two .game-status {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.match-summary .content-container .group-one .row-three .game-duration {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.match-summary .content-container .group-two .row-one .champion {
     position: relative;
     margin-right: 2px;
 }
 
-.champion-image {
+.match-summary .content-container .group-two .row-one .summoner-spells {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2px;
+}
+
+.match-summary .content-container .group-two .row-one .runes {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.match-summary .content-container .group-two .row-one .champion .champion-face {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,7 +242,13 @@ game-status {
     overflow: hidden;
 }
 
-.champion-level {
+.match-summary .content-container .group-two .row-one .champion .champion-face img {
+    width: 100%;
+    height: 100%;
+    transform: scale(1.1);
+}
+
+.match-summary .content-container .group-two .row-one .champion .champion-level {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -71,32 +257,22 @@ game-status {
     background-color: #191937;
     font-size: 10px;
     font-weight: 500;
-    color: white;
     text-align: center;
+    color: white;
 }
 
-.summoner-spells {
-    display: flex;
-    flex-direction: column;
-    margin-right: 2px;
-}
-
-.summoner-spell-image {
+.match-summary .content-container .group-two .row-one .summoner-spells .summoner-spell {
     width: 22px;
     height: 22px;
     border-radius: 3px;
     background-color: #191937;
 }
 
-.runes {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
+.match-summary .content-container .group-two .row-one .summoner-spells .summoner-spell:first-child {
+    margin-bottom: 2px;
 }
 
-.rune-image {
+.match-summary .content-container .group-two .row-one .runes .rune {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,88 +282,115 @@ game-status {
     border-radius: 3px;
 }
 
-.stats-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.match-summary .content-container .group-two .row-one .runes .rune:first-child {
+    margin-bottom: 2px;
 }
 
-.kda {
+.match-summary .content-container .group-two .row-one .runes .rune img {
+    width: 22px;
+    height: 22px;
+}
+
+.match-summary .content-container .group-two .row-one .runes .rune-substyle img {
+    width: 20px;
+    height: 20px;
+}
+
+/* POST STATS */
+
+.match-summary .post-stats .kda-total {
     margin-bottom: 1px;
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
 }
 
-.kda-ratio,
-.kill-participation {
+.match-summary .post-stats .kda-ratio {
     margin-top: 2px;
     line-height: 13px;
     font-size: 12px;
     font-weight: 700;
 }
 
-.cs {
+.match-summary .post-stats .cs {
     margin-top: 2px;
     line-height: 13px;
     font-size: 12px;
     font-weight: 700;
 }
 
-.items {
+.match-summary .post-stats .kill-participation {
+    margin-top: 2px;
+    line-height: 13px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.match-summary .post-stats .kda-total .slash {
+    color: #5f5f7b;
+}
+
+
+.match-summary .post-stats .multi-kill:not(empty) {
+    margin-top: 10px;
+}
+
+/* ITEMS */
+
+.match-summary .group-three .items {
     display: flex;
 }
 
-.items-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.match-summary .group-three .items .main-items .items-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 2px;
+    justify-content: space-between;
 }
 
-.item-image {
+.match-summary .group-three .items .item-wrapper {
+    border-radius: 3px;
+    background-color: #383864;
+    overflow: hidden;
+}
+
+.match-summary .group-three .items .item-image {
     width: 22px;
     height: 22px;
     border-radius: 3px;
 }
 
-.item-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 2px;
-    justify-content: space-between;
-}
-
-.item-wrapper {
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.trinket-container {
+.match-summary .group-three .items .trinket {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 4px;
 }
 
-.players-container {
-    display: flex;
-}
+/* PARTICIPANTS */
 
-.team-list {
+.match-summary .group-four .team-list {
     flex: 1 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
-.summoner-entry {
+.match-summary .group-four .team-list:first-of-type {
+    margin-right: 4px;
+}
+
+.match-summary .group-four .team-list .summoner {
     display: flex;
     align-items: center;
 }
 
-.champion-face {
+.match-summary .group-four .team-list .summoner:not(:last-child) {
+    margin-bottom: 2px;
+}
+
+.match-summary .group-four .team-list .summoner .champion-face {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -199,16 +402,23 @@ game-status {
     overflow: hidden;
 }
 
-.summoner-name {
+.match-summary .group-four .team-list .summoner .champion-face img {
+    width: 100%;
+    height: 100%;
+    transform: scale(1.1);
+    vertical-align: bottom;
+}
+
+.match-summary .group-four .team-list .summoner .summoner-name {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     max-width: 60px;
 }
 
-.summoner-name a {
+.match-summary .group-four .team-list .summoner .summoner-name a {
     font-size: 10px;
     font-weight: 500;
-    color: #222;
-    cursor: pointer;
+    display: block;
+    color: #0a0a0a;
 }
