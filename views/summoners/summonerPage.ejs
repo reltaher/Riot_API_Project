@@ -4,6 +4,9 @@
         <% for (let summoner of summonerRankedInfo) { %>
         <div class="summoner-profile">
             <div class="profile-icon">
+                <div class="level-header">
+                    <%= summonerAccountInfo.summonerLevel  %>
+                </div>
                 <div class="profile-icon-border">
                     <img class="profile-icon-image"
                         src="http://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/<%= summonerAccountInfo.profileIconId %>.png"
